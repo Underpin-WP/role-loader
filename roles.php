@@ -1,14 +1,22 @@
 <?php
+
+use Underpin\Abstracts\Underpin;
+
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
 // Add this loader.
-add_action( 'underpin/before_setup', function ( $file, $class ) {
-	require_once( plugin_dir_path( __FILE__ ) . 'Role.php' );
-	require_once( plugin_dir_path( __FILE__ ) . 'Role_Instance.php' );
-	Underpin\underpin()->get( $file, $class )->loaders()->add( 'roles', [
-		'instance' => 'Underpin_Roles\Abstracts\Role',
-		'default'  => 'Underpin_Roles\Factories\Role_Instance',
-	] );
-}, 10, 2 );
+Underpin::attach( 'setup', new \Underpin\Factories\Observer( 'roles', [
+		'update' => function ( Underpin $plugin, $args ) {
+			require_once( plugin_dir_path( __FILE__ ) . 'Role.php' );
+			require_once( plugin_dir_path( __FILE__ ) . 'Role_Instance.php' );
+			$plugin->loaders()->add( 'roles', [
+				'name'        => 'Roles',
+				'description' => 'Handles setting custom roles in WordPress',
+				'instance'    => 'Underpin_Roles\Abstracts\Role',
+				'default'     => 'Underpin_Roles\Factories\Role_Instance',
+			] );
+		},
+	] )
+);
