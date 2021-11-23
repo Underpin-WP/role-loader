@@ -6,7 +6,7 @@
  * @package Underpin\Abstracts
  */
 
-namespace Underpin_Roles\Abstracts;
+namespace Underpin\Roles\Abstracts;
 
 use Underpin\Traits\Feature_Extension;
 
