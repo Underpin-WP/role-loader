@@ -1,10 +1,10 @@
 <?php
 
-namespace Underpin_Roles\Factories;
+namespace Underpin\Roles\Factories;
 
 
 use Underpin\Traits\Instance_Setter;
-use Underpin_Roles\Abstracts\Role;
+use Underpin\Roles\Abstracts\Role;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
